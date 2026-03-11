@@ -23,8 +23,39 @@ Se você já conectou sua conta GitHub na Vercel, o fluxo é este:
    - Build Command: `npm run build`
    - Output Directory: padrão do Next.js
 6. Clique em **Deploy**.
-7. Ao finalizar, a Vercel mostra uma URL pública como:
+7. Ao finalizar, abra a URL pública mostrada no deploy:
    - `https://<nome-do-projeto>.vercel.app`
+
+## Erro `404: NOT_FOUND` na Vercel (como corrigir)
+
+Se aparecer a tela de erro da Vercel com `404: NOT_FOUND`, normalmente é um destes cenários:
+
+1. **URL incorreta**
+   - Você abriu um link antigo/de preview expirado.
+   - Solução: abra a URL em **Project > Deployments > Latest > Visit**.
+
+2. **Projeto não foi publicado nessa branch**
+   - Seu código está local, mas não foi feito push para o GitHub.
+   - Solução:
+
+```bash
+git remote -v
+git branch --show-current
+git push -u origin main
+```
+
+3. **Domínio da produção aponta para outro projeto/time**
+   - Solução: em **Project > Settings > Domains**, remova e adicione novamente o domínio correto.
+
+4. **Deploy falhou e não gerou rota ativa**
+   - Solução: ver logs em **Deployments** e clicar em **Redeploy** no último commit.
+
+### Checklist rápido (2 minutos)
+
+1. Vercel > Projeto correto.
+2. Aba **Deployments** com status **Ready** no último deploy.
+3. Clique em **Visit** no último deploy (não em link antigo).
+4. Se funcionar no link do deploy, promova para produção (ou faça merge na branch de produção).
 
 ## Não está achando no GitHub? (checklist rápido)
 
